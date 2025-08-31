@@ -49,17 +49,21 @@ extraObjects:
   #     basicAuth:
   #       secret: dashboard-auth-secret
 
+
+service:
+  type: NodePort
+
 # We will route with Gateway API instead.
 ingressClass:
-  enabled: true
+  enabled: false
 
 # Enable Gateway API Provider & Disables the KubernetesIngress provider
 # Providers tell Traefik where to find routing configuration.
 providers:
   kubernetesIngress:
-     enabled: true
-  kubernetesGateway:
      enabled: false
+  kubernetesGateway:
+     enabled: true
 
 ## Gateway Listeners
 gateway:
