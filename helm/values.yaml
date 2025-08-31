@@ -51,19 +51,30 @@ extraObjects:
 
 
 service:
-  type: NodePort
+  enabled: false
+  additionalServices:
+    - type: NodePort
+      ports:
+      - name: web
+        port: 80
+        protocol: TCP
+        targetPort: web
+      - name: websecure
+        port: 443
+        protocol: TCP
+        targetPort: websecure
 
 # We will route with Gateway API instead.
 ingressClass:
-  enabled: true
+  enabled: false
 
 # Enable Gateway API Provider & Disables the KubernetesIngress provider
 # Providers tell Traefik where to find routing configuration.
 providers:
   kubernetesIngress:
-     enabled: true
-  kubernetesGateway:
      enabled: false
+  kubernetesGateway:
+     enabled: true
 
 ## Gateway Listeners
 gateway:
